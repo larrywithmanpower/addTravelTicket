@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Travel</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/all.css">
+</head>
+
+<body>
+    <!-- addTicket -->
+    <section class="container">
+        <section class="addTicket-area">
+            <h1 class="text-hide">旅遊套票搜尋</h1>
+            <div class="row">
+                <div class="col-6">
+                    <img src="./images/undraw_Traveling_re_weve (1).png" alt="">
+                    <img src="./images/Let’s Travel !.png" alt="" class="d-rwd-none">
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <h2 class="text-primary addTicket-area__title col-12"><i class="fas fa-plus-circle"></i>新增旅遊套票
+                        </h2>
+                    </div>
+                    <form>
+                        <div class="form-group row">
+                            <label for="ticketName" class="text-primary col-3">套票名稱</label>
+                            <input type="text" class="form-control col-9" id="ticketName" placeholder="請填寫套票名稱">
+                        </div>
+                        <div class="form-group row">
+                            <label for="imgWebsite" class="text-primary col-3">圖片網址</label>
+                            <input type="url" class="form-control col-9" id="imgWebsite" placeholder="請填寫圖片網址">
+                        </div>
+                        <div class="form-group row">
+                            <label for="location" class="text-primary col-3">景點地區</label>
+                            <select id="location" class="form-control col-9">
+                                <option value disabled selected>請選擇景點地區</option>
+                                <option value="台北">台北</option>
+                                <option value="台中">台中</option>
+                                <option value="高雄">高雄</option>
+                                <option value="台南">台南</option>
+                                <option value="花蓮">花蓮</option>
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ticketCharge" class="text-primary col-3">套票金額</label>
+                            <input type="number" class="form-control col-9" id="ticketCharge" placeholder="請填寫套票金額">
+                        </div>
+                        <div class="form-group row">
+                            <label for="ticketNum" class="text-primary col-3">套票組數</label>
+                            <input type="number" class="form-control col-9" id="ticketNum" placeholder="請填寫套票組數">
+                        </div>
+                        <div class="form-group row">
+                            <label for="ticketRank" class="text-primary col-3">套票星級</label>
+                            <input type="number" class="form-control col-9" id="ticketRank" placeholder="請填寫套票星級">
+                        </div>
+                        <div class="form-group row">
+                            <label for="ticketDescription" class="text-primary col-3">套票描述</label>
+                            <textarea id="ticketDescription" class="form-control col-9"
+                                placeholder="請填寫套票描述（限 100 字）"></textarea>
+                        </div>
+                    </form>
+                    <div class="text-right">
+                        <button class="btn">新增套票</button>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <main class="main-area bg-info">
+        <section class="search-area row">
+            <div class="col-4">
+                <input type="text" class="form-control form-control--searchArea" placeholder="地區搜尋">
+            </div>
+            <div class="col-8">
+                <span class="line-height-center text-muted">本次搜尋共3筆資料</span>
+            </div>
+        </section>
+        <section class="row" id="cardInfo">
+            <!-- <div class="col-4 mb-40">
+                <div class="card">
+                    <span class="bg-secondary card-badgeBig">地點</span>
+                    <a href="#" class="card-img-animation">
+                        <img src="./images/photo-1535726858289-9ffe2dff6f52.png" class="card-img-top" alt="...">
+                    </a>
+                    <div class="card-body">
+                        <span class="bg-primary card-body-badgeSmall">評價</span>
+                        <h3 class="card-title">Card title</h3>
+                        <p class="text-muted">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <div class="d-flex align-item-center">
+                            <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後8組</span>
+                        <span class="text-primary d-flex align-item-center mr-5">TWD <strong class="pl-5">$ 1,280</strong></span>
+                        </div>                        
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="col-4 mb-40">
+                <div class="card">
+                    <span class="bg-secondary card-badgeBig">地點</span>
+                    <a href="#" class="card-img-animation">
+                        <img src="./images/photo-1535726858289-9ffe2dff6f52.png" class="card-img-top" alt="...">
+                    </a>
+                    <div class="card-body">
+                        <span class="bg-primary card-body-badgeSmall">評價</span>
+                        <h3 class="card-title">Card title</h3>
+                        <p class="text-muted">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <div class="d-flex align-item-center">
+                            <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後8組</span>
+                        <span class="text-primary d-flex align-item-center mr-5">TWD <strong class="pl-5">$ 1,280</strong></span>
+                        </div>                        
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="col-4 mb-40" >
+                <div class="card">
+                    <span class="bg-secondary card-badgeBig">地點</span>
+                    <a href="#" class="card-img-animation">
+                        <img src="./images/photo-1535726858289-9ffe2dff6f52.png" class="card-img-top" alt="...">
+                    </a>
+                    <div class="card-body">
+                        <span class="bg-primary card-body-badgeSmall">評價</span>
+                        <h3 class="card-title">Card title</h3>
+                        <p class="text-muted">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <div class="d-flex align-item-center">
+                            <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後8組</span>
+                        <span class="text-primary d-flex align-item-center mr-5">TWD <strong class="pl-5">$ 1,280</strong></span>
+                        </div>                        
+                    </div>
+                </div>
+            </div> -->
+        </section>
+    </main>
+
+
+    <script src="./js/all.js"></script>
+</body>
+
+</html>
