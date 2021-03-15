@@ -1,7 +1,7 @@
 
 // card information
 
-let travelInfo = [
+let travelData = [
     {
         "id": 0,
         "name": "綠島自由行套裝行程",
@@ -44,7 +44,7 @@ let travelInfo = [
     },
     {
         "id": 4,
-        "name": "追尋藍眼淚～馬祖風情南北竿3天2夜",
+        "name": "藍眼淚～馬祖風情南北竿3天2夜",
         "imgUrl": "https://cdn2.ettoday.net/images/207/d207779.jpg",
         "area": "台南",
         "description": "馬祖列島以「媽祖」而得名，由南竿、北竿、莒光及東引等數十座島嶼所構成，為目前臺澎金馬自由地區最北端之領土，位於臺灣海峽西北西方，面臨閩江口、連江口及羅源灣，與大陸僅呎水之隔，在反共復國的年代，這裡更曾擔綱保衛臺澎的前哨，標語、坑道、阿兵哥，形塑了極特殊的戰地風貌。",
@@ -64,31 +64,70 @@ let travelInfo = [
     },
 ];
 
+// 顯示初始資料
+const cardInfo = document.querySelector(".cardInfo");
 
-const cardInfo = document.querySelector("#cardInfo");
+function init() {
+    let str = "";
+    travelData.forEach(function (item) {
+        str += `<div class="col-4 mb-40">
+                    <div class="card">
+                        <span class="bg-secondary card-badgeBig">${item.area}</span>
+                        <a href="#" class="card-img-animation">
+                            <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
+                        </a>
+                        <div class="card-body">
+                            <span class="bg-primary card-body-badgeSmall">${item.rate}</span>
+                            <h3 class="card-title">${item.name}</h3>
+                            <p class="text-muted">${item.description}</p>
+                            <div class="d-flex align-item-center">
+                                <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後${item.group}組</span>
+                            <span class="text-primary d-flex align-item-center mr-5">TWD <strong class="pl-5">$ ${item.price}</strong></span>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>`
+    });
+    cardInfo.innerHTML = str;
+}
+init();
 
-let travelContent = "";
-
-travelInfo.forEach(function (item) {  
-    travelContent += `<div class="col-4 mb-40"> <div class="card">
-    <span class="bg-secondary card-badgeBig">${item.area}</span>
-    <a href="#" class="card-img-animation">
-        <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
-    </a>
-    <div class="card-body">
-        <span class="bg-primary card-body-badgeSmall">${item.rate}</span>
-        <h3 class="card-title">${item.name}</h3>
-        <p class="text-muted">${item.description}</p>
-        <div class="d-flex align-item-center">
-            <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後${item.group}組</span>
-        <span class="text-primary d-flex align-item-center mr-5">TWD <strong class="pl-5">$ ${item.price}</strong></span>
-        </div>                        
-    </div>
-</div>
-</div>`
+// 篩選
+const selectLocation = document.querySelector(".selectLocation");
+const selectNum = document.querySelector(".selectNum");
+selectLocation.addEventListener("click", function(e) {
+    // console.log(e.target.value);
+    if (e.target.value == undefined) {
+        console.log('請重新選擇');
+        return;
+    }
+    let str = "";
+    let strSearchNum = "";
+    let count = 0;
+    travelData.forEach(function (item, index) {  
+        if (e.target.value == item["area"]) {
+            // console.log(item.area);
+            count ++;
+            str += `<div class="col-4 mb-40">
+            <div class="card">
+                <span class="bg-secondary card-badgeBig">${item.area}</span>
+                <a href="#" class="card-img-animation">
+                    <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
+                </a>
+                <div class="card-body">
+                    <span class="bg-primary card-body-badgeSmall">${item.rate}</span>
+                    <h3 class="card-title">${item.name}</h3>
+                    <p class="text-muted">${item.description}</p>
+                    <div class="d-flex align-item-center">
+                        <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後${item.group}組</span>
+                    <span class="text-primary d-flex align-item-center mr-5">TWD <strong class="pl-5">$ ${item.price}</strong></span>
+                    </div>                        
+                </div>
+            </div>
+        </div>`;
+        strSearchNum =  `本次搜尋共${count}筆資料`;
+        };
+        cardInfo.innerHTML = str;
+        selectNum.textContent = strSearchNum;
+    });
 });
-
-
-
-cardInfo.innerHTML = travelContent;
-

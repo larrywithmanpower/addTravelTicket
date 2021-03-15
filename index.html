@@ -76,13 +76,20 @@
     <main class="main-area bg-info">
         <section class="search-area row">
             <div class="col-4">
-                <input type="text" class="form-control form-control--searchArea" placeholder="地區搜尋">
+                <select class="form-control text-muted selectLocation">
+                    <option value disabled selected>請選擇地區</option>
+                    <option value="台北">台北</option>
+                    <option value="台中">台中</option>
+                    <option value="高雄">高雄</option>
+                    <option value="花蓮">花蓮</option>
+                    <option value="台南">台南</option>
+                </select>
             </div>
-            <div class="col-8">
-                <span class="line-height-center text-muted">本次搜尋共3筆資料</span>
+            <div class="col-8 text-rwd-center">
+                <span class="line-height-center text-muted selectNum">本次搜尋共3筆資料</span>
             </div>
         </section>
-        <section class="row" id="cardInfo">
+        <section class="row cardInfo">
             <!-- <div class="col-4 mb-40">
                 <div class="card">
                     <span class="bg-secondary card-badgeBig">地點</span>
