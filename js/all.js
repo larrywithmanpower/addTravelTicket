@@ -165,7 +165,7 @@ const addBtn = document.querySelector(".btn");
 
 addBtn.addEventListener("click", addCard);
 function addCard() {
-    if (ticketName.value == "" || imgUrl.value =="" || ticketDescription.value == "" || area.value == "" || ticketRank.value == "") {
+    if (ticketName.value == "" || imgUrl.value =="" || area.value == "" || ticketRank.value == "") {
         alert("內容無資料，無法資料新增");
     } else {
         travelData.push({
