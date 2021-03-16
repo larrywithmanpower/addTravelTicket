@@ -239,6 +239,7 @@ a {
 }
 
 .form-control--searchArea {
+  width: 80%;
   border: 1px solid #ced4da;
   border-bottom: 1px solid none;
   background-color: #fff;
@@ -292,6 +293,8 @@ a {
   word-wrap: break-word;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
+  -webkit-box-shadow: 0px 3px 6px #00000029;
+          box-shadow: 0px 3px 6px #00000029;
   border-radius: 0.25rem;
 }
 
@@ -330,7 +333,7 @@ a {
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   min-height: 1px;
-  padding: 1.25rem;
+  padding: 1rem;
 }
 
 .card-body-badgeSmall {
@@ -354,7 +357,7 @@ a {
 }
 
 .card strong {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .card span {
@@ -371,6 +374,10 @@ a {
   margin-right: auto;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .align-item-center {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -378,12 +385,18 @@ a {
   vertical-align: middle;
 }
 
+.justify-content-end {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+}
+
 .pl-5 {
   padding-left: 5px;
 }
 
 .mr-5 {
-  margin-right: 5px;
+  margin-right: 4px;
 }
 
 .mb-40 {
@@ -418,7 +431,7 @@ a {
   -webkit-box-shadow: 0px 3px 6px #00000029;
           box-shadow: 0px 3px 6px #00000029;
   margin-top: 120px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   border-radius: 15px;
   padding: 0 75px 60px 75px;
 }
@@ -443,7 +456,7 @@ a {
 }
 
 .main-area {
-  padding: 4.2rem;
+  padding: 2.5rem;
 }
 
 .search-area {

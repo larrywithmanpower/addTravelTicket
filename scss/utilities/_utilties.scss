@@ -68,6 +68,7 @@
         box-shadow: 0 0 0 5px rgba(21, 156, 228, 0.4);
     }
     &--searchArea {
+        width: 80%;
         border: 1px solid $border-muted;
         border-bottom: 1px solid none;
         background-color: $light;
@@ -115,6 +116,7 @@
     word-wrap: break-word;
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.125);
+    box-shadow:  0px 3px 6px #00000029;
     border-radius: 0.25rem;
     &-img-animation {
         display: block;
@@ -143,7 +145,7 @@
         position: relative;
         flex: 1 1 auto;
         min-height: 1px;
-        padding: 1.25rem;
+        padding: 1rem;
         &-badgeSmall {
             position: absolute;
             top: -15px;
@@ -164,7 +166,7 @@
         font-size: 20px;
     }
     strong {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     span {
         font-weight: bold;
@@ -180,11 +182,18 @@
     margin-right: auto;
 }
 
+.ml-auto {
+    margin-left: auto;
+}
+
 .align-item-center {
     align-items: center;
     vertical-align: middle;
 }
 
+.justify-content-end {
+    justify-content: end;
+}
 
 // spacing
 
@@ -193,7 +202,7 @@
 }
 
 .mr-5 {
-    margin-right: 5px;
+    margin-right: 4px;
 }
 
 .mb-40 {

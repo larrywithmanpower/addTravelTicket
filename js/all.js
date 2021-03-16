@@ -83,7 +83,7 @@ function init() {
                             <div class="d-flex align-item-center">
                                 <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後${item.group}組</span>
                             <span class="text-primary d-flex align-item-center mr-5">TWD <strong class="pl-5">$ ${item.price}</strong></span>
-                            </div>                        
+                            </div>                     
                         </div>
                     </div>
                 </div>`
@@ -126,8 +126,61 @@ selectLocation.addEventListener("click", function(e) {
             </div>
         </div>`;
         strSearchNum =  `本次搜尋共${count}筆資料`;
-        };
+        } else if (e.target.value == "全部") {
+            str += `<div class="col-4 mb-40">
+            <div class="card">
+                <span class="bg-secondary card-badgeBig">${item.area}</span>
+                <a href="#" class="card-img-animation">
+                    <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
+                </a>
+                <div class="card-body">
+                    <span class="bg-primary card-body-badgeSmall">${item.rate}</span>
+                    <h3 class="card-title">${item.name}</h3>
+                    <p class="text-muted">${item.description}</p>
+                    <div class="d-flex align-item-center">
+                        <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後${item.group}組</span>
+                    <span class="text-primary d-flex align-item-center mr-5"><samll>TWD</small> <strong class="pl-5">$${item.price}</strong></span>
+                    </div>                        
+                </div>
+            </div>
+        </div>`;
+        }
         cardInfo.innerHTML = str;
         selectNum.textContent = strSearchNum;
     });
 });
+
+
+// 新增
+const ticketName = document.querySelector("#ticketName");
+const imgUrl = document.querySelector("#imgUrl");
+const area = document.querySelector("#area");
+const ticketCharge = document.querySelector("#ticketCharge");
+const ticketNum = document.querySelector("#ticketNum");
+const ticketRank = document.querySelector("#ticketRank");
+const ticketDescription = document.querySelector("#ticketDescription");
+const formReset = document.querySelector(".formReset");
+
+const addBtn = document.querySelector(".btn");
+
+addBtn.addEventListener("click", addCard);
+function addCard() {
+    if (ticketName.value == "" || imgUrl.value =="" || ticketDescription.value == "" || area.value == "" || ticketRank.value == "") {
+        alert("內容無資料，無法資料新增");
+    } else {
+        travelData.push({
+            "id": Date.now(),
+            "name": ticketName.value,
+            "imgUrl": imgUrl.value,
+            "area": area.value,
+            "description": ticketDescription.value,
+            "group": Number(ticketNum.value),
+            "price": Number(ticketCharge.value),
+            "rate": Number(ticketRank.value)
+        });
+    }
+    
+    init();
+    formReset.reset();
+    console.log(travelData.id);
+}
