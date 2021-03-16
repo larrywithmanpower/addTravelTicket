@@ -46,7 +46,7 @@ let travelData = [
         "id": 4,
         "name": "藍眼淚～馬祖風情南北竿3天2夜",
         "imgUrl": "https://cdn2.ettoday.net/images/207/d207779.jpg",
-        "area": "台南",
+        "area": "離島",
         "description": "馬祖列島以「媽祖」而得名，由南竿、北竿、莒光及東引等數十座島嶼所構成，為目前臺澎金馬自由地區最北端之領土，位於臺灣海峽西北西方，面臨閩江口、連江口及羅源灣，與大陸僅呎水之隔，在反共復國的年代，這裡更曾擔綱保衛臺澎的前哨，標語、坑道、阿兵哥，形塑了極特殊的戰地風貌。",
         "group": 68,
         "price": 3880,
@@ -60,6 +60,36 @@ let travelData = [
         "description": "豐富的海底生物等著您一起來探索，幸運的話還有機會與海龜同游！切記請勿觸碰、騷擾海龜唷～",
         "group": 99,
         "price": 1880,
+        "rate": 9.1
+    },
+    {
+        "id": 6,
+        "name": "探索台東綠色公路",
+        "imgUrl": "https://i1.wp.com/blog.kkday.com/wp-content/uploads/batch_shutterstock_1523235686.jpg?w=900&quality=80&strip=all&ssl=1",
+        "area": "台東",
+        "description": "台東位於北迴歸線附近，一年四季如夏，西鄰中央山脈，東邊則是太平洋，擁有絕佳的天然景致。花蓮與台東這兩大城市，有著名的東海岸線（台11線）與縱谷線（台9線），這兩條公路的最後交會點就是台東，東海岸線主要玩的地區是從長濱一路延伸至台東市，縱谷線則是從池上到卑南的範圍。",
+        "group": 39,
+        "price": 5140,
+        "rate": 9.4
+    },
+    {
+        "id": 7,
+        "name": "２人成行►【澎湖花火節】",
+        "imgUrl": "https://image.cdn-eztravel.com.tw/XweeROulogsDnkRtgnnfMZNJYXbO3daj6r5Jd8tiQu4/rs:fit:600:300:1/g:ce/aHR0cHM6Ly90cmlwLmNkbi1lenRyYXZlbC5jb20udHcvaW1nL0dSVC9zdW1tZXIxNS5qcGc.jpg",
+        "area": "離島",
+        "description": "在台灣的離島當中，賦予著海洋的魅力，並列選為『世界最美麗海灣組織』和『10大秘密島嶼』，還有寂寞星球雜誌(Lonely Planet)認證『全球2011年非去不可的地方』。澎湖也是台灣國人夏日戲水最熱門的旅遊景點，還有和海洋結合的天然美景，像雙心石滬、吉貝嶼、走路沙灘和天堂路，一定讓旅人發現澎湖海灣的魅力。",
+        "group": 88,
+        "price": 8400,
+        "rate": 9.9
+    },
+    {
+        "id": 8,
+        "name": "龜山島登島、壯圍濱海生態之旅一日遊",
+        "imgUrl": "https://www.taiwan.net.tw/pic.ashx?qp=1/big_scenic_spots/pic_C100_164_22.jpg&sizetype=3",
+        "area": "離島",
+        "description": "搭船登上座落在太平洋上形似烏龜的火山島一探究竟，並近距離欣賞因海底溫泉行程的牛奶海，再乘坐拉拉車遊覽美麗的壯圍海岸線。",
+        "group": 100,
+        "price": 500,
         "rate": 9.1
     },
 ];
