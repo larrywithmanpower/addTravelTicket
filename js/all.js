@@ -122,10 +122,10 @@ function init() {
 }
 init();
 
-// 篩選(使用手機chrome篩選時會產生錯誤，電腦上的手機模擬則沒有問題)
+// 篩選
 const selectLocation = document.querySelector(".selectLocation");
 const selectNum = document.querySelector(".selectNum");
-selectLocation.addEventListener("click", function(e) {
+selectLocation.addEventListener("click", function (e) {
     // console.log(e.target.value);
     if (e.target.value == undefined) {
         console.log('請重新選擇');
@@ -134,27 +134,28 @@ selectLocation.addEventListener("click", function(e) {
     let str = "";
     let strSearchNum = "";
     let count = 0;
-    travelData.forEach(function (item, index) {  
-        if (e.target.value == item.area) {
-            count ++;
+    travelData.forEach(function (item, index) {
+        // console.log(e.target.value == item["area"]);
+        if (e.target.value == item["area"]) {
+            count++;
             str += `<div class="col-4 mb-40">
-            <div class="card">
-                <span class="bg-secondary card-badgeBig">${item.area}</span>
-                <a href="#" class="card-img-animation">
-                    <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
-                </a>
-                <div class="card-body">
-                    <span class="bg-primary card-body-badgeSmall">${item.rate}</span>
-                    <h3 class="card-title">${item.name}</h3>
-                    <p class="text-muted">${item.description}</p>
-                    <div class="d-flex align-item-center">
-                        <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後${item.group}組</span>
-                    <span class="text-primary d-flex align-item-center mr-5">TWD <strong class="pl-5">$ ${item.price}</strong></span>
-                    </div>                        
+                <div class="card">
+                    <span class="bg-secondary card-badgeBig">${item.area}</span>
+                    <a href="#" class="card-img-animation">
+                        <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
+                    </a>
+                    <div class="card-body">
+                        <span class="bg-primary card-body-badgeSmall">${item.rate}</span>
+                        <h3 class="card-title">${item.name}</h3>
+                        <p class="text-muted">${item.description}</p>
+                        <div class="d-flex align-item-center">
+                            <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後${item.group}組</span>
+                        <span class="text-primary d-flex align-item-center mr-5">TWD <strong class="pl-5">$ ${item.price}</strong></span>
+                        </div>                        
+                    </div>
                 </div>
-            </div>
-        </div>`;
-        strSearchNum =  `本次搜尋共${count}筆資料`;
+            </div>`;
+            strSearchNum = `本次搜尋共${count}筆資料`;
         } else if (e.target.value == "全部") {
             str += `<div class="col-4 mb-40">
             <div class="card">
@@ -194,7 +195,8 @@ const addBtn = document.querySelector(".btn");
 
 addBtn.addEventListener("click", addCard);
 function addCard() {
-    if (ticketName.value == "" || imgUrl.value =="" || area.value == "" || ticketRank.value == "") {
+    let str = "";
+    if (ticketName.value == "" || imgUrl.value == "" || area.value == "" || ticketRank.value == "") {
         alert("資料不齊全，無法資料新增");
     } else {
         travelData.push({
@@ -208,7 +210,6 @@ function addCard() {
             "rate": Number(ticketRank.value)
         });
     }
-    
     init();
     formReset.reset();
     console.log(travelData.id);
