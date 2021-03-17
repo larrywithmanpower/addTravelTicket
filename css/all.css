@@ -248,6 +248,12 @@ a {
   font-size: 0.8rem;
 }
 
+@media (max-width: 768px) {
+  .form-control--searchArea {
+    width: 100%;
+  }
+}
+
 .btn {
   display: inline-block;
   font-weight: 400;
