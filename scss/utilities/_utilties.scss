@@ -155,6 +155,11 @@
             padding: 5px 8px;
             color: $light;
         }
+        // p {
+        //     white-space: nowrap;
+        //     overflow: hidden;
+        //     text-overflow: ellipsis;
+        // }
     }
     &-badgeBig {
         position: absolute;
@@ -170,7 +175,7 @@
     }
     span {
         font-weight: bold;
-    }
+    }    
 }
 
 // flex

@@ -122,7 +122,7 @@ function init() {
 }
 init();
 
-// 篩選
+// 篩選(使用手機chrome篩選時會產生錯誤，電腦上的手機模擬則沒有問題)
 const selectLocation = document.querySelector(".selectLocation");
 const selectNum = document.querySelector(".selectNum");
 selectLocation.addEventListener("click", function(e) {
@@ -135,8 +135,7 @@ selectLocation.addEventListener("click", function(e) {
     let strSearchNum = "";
     let count = 0;
     travelData.forEach(function (item, index) {  
-        if (e.target.value == item["area"]) {
-            // console.log(item.area);
+        if (e.target.value == item.area) {
             count ++;
             str += `<div class="col-4 mb-40">
             <div class="card">
@@ -196,7 +195,7 @@ const addBtn = document.querySelector(".btn");
 addBtn.addEventListener("click", addCard);
 function addCard() {
     if (ticketName.value == "" || imgUrl.value =="" || area.value == "" || ticketRank.value == "") {
-        alert("內容無資料，無法資料新增");
+        alert("資料不齊全，無法資料新增");
     } else {
         travelData.push({
             "id": Date.now(),
