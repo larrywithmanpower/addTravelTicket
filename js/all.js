@@ -154,9 +154,9 @@ selectLocation.addEventListener("click", function (e) {
                         </div>                        
                     </div>
                 </div>
-            </div>`;
+            </div>`;            
             strSearchNum = `本次搜尋共${count}筆資料`;
-        } else if (e.target.value == "全部") {
+        } else if (e.target.value == "全部地區") {
             str += `<div class="col-4 mb-40">
             <div class="card">
                 <span class="bg-secondary card-badgeBig">${item.area}</span>
@@ -174,6 +174,10 @@ selectLocation.addEventListener("click", function (e) {
                 </div>
             </div>
         </div>`;
+        }
+        // 沒有資料的顯示搜尋為0筆
+        if (count === 0 && e.target.value !== "全部地區" ) {
+            strSearchNum = `本次搜尋共0筆資料`;                
         }
         cardInfo.innerHTML = str;
         selectNum.textContent = strSearchNum;
@@ -200,17 +204,18 @@ function addCard() {
         alert("資料不齊全，無法資料新增");
     } else {
         travelData.push({
-            "id": Date.now(),
+            "id": Date.now(), //產出亂數
             "name": ticketName.value,
             "imgUrl": imgUrl.value,
             "area": area.value,
             "description": ticketDescription.value,
-            "group": Number(ticketNum.value),
+            "group": Number(ticketNum.value), //使用Number()轉型
             "price": Number(ticketCharge.value),
             "rate": Number(ticketRank.value)
         });
     }
     init();
+    // 表單清空使用.reset()
     formReset.reset();
     console.log(travelData.id);
 }
