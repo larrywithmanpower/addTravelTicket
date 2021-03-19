@@ -124,15 +124,16 @@ function init() {
     let str = "";
     let strSearchNum = "";
     let count = 0;
+
     travelData.forEach(function (item) {
         // 在forEach的函式內進行累加
         count++;
         str += addStr(item);
-        return count;
+        strSearchNum = `本次搜尋共${count}筆資料`;
     });
     cardInfo.innerHTML = str;
-    // 想要嘗試在第一次畫面載入時就會顯示搜尋資料筆數，但是都無法顯示
     selectNum.textContent = strSearchNum;
+
 }
 init();
 
