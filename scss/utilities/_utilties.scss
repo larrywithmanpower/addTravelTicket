@@ -115,12 +115,15 @@
 // card-function
 .card {
     position: relative;
+    display: flex;
+    flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.125);
     box-shadow:  0px 3px 6px #00000029;
     border-radius: 0.25rem;
+    height: 100%;
     &-img-animation {
         display: block;
         overflow: hidden;
@@ -130,6 +133,7 @@
         display: block;
         margin: 0 auto;
         width: 100%;
+        height: 180px;
         border-top-left-radius: calc(0.25rem - 1px);
         border-top-right-radius: calc(0.25rem - 1px);
         // animation
@@ -148,7 +152,7 @@
         position: relative;
         flex: 1 1 auto;
         min-height: 1px;
-        padding: 1rem;
+        padding: 0 1rem;
         &-badgeSmall {
             position: absolute;
             top: -15px;
@@ -158,11 +162,6 @@
             padding: 5px 8px;
             color: $light;
         }
-        // p {
-        //     white-space: nowrap;
-        //     overflow: hidden;
-        //     text-overflow: ellipsis;
-        // }
     }
     &-badgeBig {
         position: absolute;
@@ -177,8 +176,11 @@
         font-size: 1.8rem;
     }
     span {
-        font-weight: bold;
+        font-weight: bold;        
     }    
+    &-footer {
+        padding: .7rem 1rem;
+    }
 }
 
 // flex

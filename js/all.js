@@ -93,71 +93,9 @@ let travelData = [
         "rate": 9.1
     },
 ];
-
-// 顯示初始資料
-const cardInfo = document.querySelector(".cardInfo");
-
-function init() {
-    let str = "";
-    travelData.forEach(function (item) {
-        str += `<div class="col-4 mb-40">
-                    <div class="card">
-                        <span class="bg-secondary card-badgeBig">${item.area}</span>
-                        <a href="#" class="card-img-animation">
-                            <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
-                        </a>
-                        <div class="card-body">
-                            <span class="bg-primary card-body-badgeSmall">${item.rate}</span>
-                            <h3 class="card-title">${item.name}</h3>
-                            <p class="text-muted">${item.description}</p>
-                            <div class="d-flex align-item-center">
-                                <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後${item.group}組</span>
-                            <span class="text-primary d-flex align-item-center mr-5">TWD <strong class="pl-5">$ ${item.price}</strong></span>
-                            </div>                     
-                        </div>
-                    </div>
-                </div>`
-    });
-    cardInfo.innerHTML = str;
-}
-init();
-
-// 篩選
-const selectLocation = document.querySelector(".selectLocation");
-const selectNum = document.querySelector(".selectNum");
-selectLocation.addEventListener("click", function (e) {
-    // console.log(e.target.value);
-    if (e.target.value == undefined) {
-        console.log('請重新選擇');
-        return;
-    }
-    let str = "";
-    let strSearchNum = "";
-    let count = 0;
-    travelData.forEach(function (item, index) {
-        // console.log(e.target.value == item["area"]);
-        if (e.target.value == item["area"]) {
-            count++;
-            str += `<div class="col-4 mb-40">
-                <div class="card">
-                    <span class="bg-secondary card-badgeBig">${item.area}</span>
-                    <a href="#" class="card-img-animation">
-                        <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
-                    </a>
-                    <div class="card-body">
-                        <span class="bg-primary card-body-badgeSmall">${item.rate}</span>
-                        <h3 class="card-title">${item.name}</h3>
-                        <p class="text-muted">${item.description}</p>
-                        <div class="d-flex align-item-center">
-                            <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後${item.group}組</span>
-                        <span class="text-primary d-flex align-item-center mr-5">TWD <strong class="pl-5">$ ${item.price}</strong></span>
-                        </div>                        
-                    </div>
-                </div>
-            </div>`;            
-            strSearchNum = `本次搜尋共${count}筆資料`;
-        } else if (e.target.value == "全部地區") {
-            str += `<div class="col-4 mb-40">
+// 將累加的html結構設為函式
+function addStr(item) {
+    str = `<div class="col-4 mb-40">
             <div class="card">
                 <span class="bg-secondary card-badgeBig">${item.area}</span>
                 <a href="#" class="card-img-animation">
@@ -167,17 +105,58 @@ selectLocation.addEventListener("click", function (e) {
                     <span class="bg-primary card-body-badgeSmall">${item.rate}</span>
                     <h3 class="card-title">${item.name}</h3>
                     <p class="text-muted">${item.description}</p>
-                    <div class="d-flex align-item-center">
-                        <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後${item.group}組</span>
-                    <span class="text-primary d-flex align-item-center mr-5"><samll>TWD</small> <strong class="pl-5">$${item.price}</strong></span>
-                    </div>                        
+                </div>                        
+                    
+                <div class="d-flex align-item-center card-footer">
+                    <span class="text-primary mr-auto"><i class="fas fa-exclamation-circle mr-5"></i>剩下最後${item.group}組</span>
+                    <span class="text-primary mr-5"><samll  class="d-flex align-item-center">TWD</small> <strong class="pl-5">$${item.price}</strong></span>
                 </div>
             </div>
         </div>`;
+    return str;
+}
+
+// 顯示初始資料
+const cardInfo = document.querySelector(".cardInfo");
+const selectNum = document.querySelector(".selectNum");
+
+function init() {
+    let str = "";
+    let strSearchNum = "";
+    let count = 0;
+    travelData.forEach(function (item) {
+        // 在forEach的函式內進行累加
+        count++;
+        str += addStr(item);
+        return count;
+    });
+    cardInfo.innerHTML = str;
+    // 想要嘗試在第一次畫面載入時就會顯示搜尋資料筆數，但是都無法顯示
+    selectNum.textContent = strSearchNum;
+}
+init();
+
+// 篩選
+const selectLocation = document.querySelector(".selectLocation");
+// const selectNum = document.querySelector(".selectNum");
+selectLocation.addEventListener("change", function (e) {
+    let str = "";
+    let strSearchNum = "";
+    let count = 0;
+    travelData.forEach(function (item, index) {
+        // console.log(e.target.value == item["area"]);
+        if (e.target.value == item["area"]) {
+            count++;
+            str += addStr(item);
+            strSearchNum = `本次搜尋共${count}筆資料`;
+        } else if (e.target.value == "全部地區") {
+            count++;
+            str += addStr(item);
+            strSearchNum = `本次搜尋共${count}筆資料`;
         }
         // 沒有資料的顯示搜尋為0筆
-        if (count === 0 && e.target.value !== "全部地區" ) {
-            strSearchNum = `本次搜尋共0筆資料`;                
+        if (count === 0 && e.target.value !== "全部地區") {
+            strSearchNum = `本次搜尋共0筆資料`;
         }
         cardInfo.innerHTML = str;
         selectNum.textContent = strSearchNum;
@@ -204,18 +183,18 @@ function addCard() {
         alert("資料不齊全，無法資料新增");
     } else {
         travelData.push({
-            "id": Date.now(), //產出亂數
-            "name": ticketName.value,
-            "imgUrl": imgUrl.value,
-            "area": area.value,
-            "description": ticketDescription.value,
-            "group": Number(ticketNum.value), //使用Number()轉型
-            "price": Number(ticketCharge.value),
-            "rate": Number(ticketRank.value)
+            id: Date.now(), //產出亂數
+            name: ticketName.value,
+            imgUrl: imgUrl.value,
+            area: area.value,
+            description: ticketDescription.value,
+            group: Number(ticketNum.value), //使用Number()轉型
+            price: Number(ticketCharge.value),
+            rate: Number(ticketRank.value)
         });
+        // 表單清空使用.reset()
+        formReset.reset();
     }
     init();
-    // 表單清空使用.reset()
-    formReset.reset();
-    console.log(travelData.id);
 }
+
