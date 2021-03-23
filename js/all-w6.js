@@ -6,7 +6,7 @@ let travelData;
 
 // axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelAPI-lv1.json')
 //     .then(function (response) {
-//         console.log(response);
+//         // console.log(response);
 //         travelData = response.data;
 //         // console.log(travelData);
 //         init();
@@ -16,9 +16,9 @@ let travelData;
 // ! LV2
 axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json')
     .then(function (response) {
-        console.log(response);
+        // console.log(response);
         travelData = response.data.data;
-        console.log(travelData);
+        // console.log(travelData);
         init();
     });
 
