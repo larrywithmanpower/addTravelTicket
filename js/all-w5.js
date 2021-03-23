@@ -124,7 +124,6 @@ function init() {
     let str = "";
     let strSearchNum = "";
     let count = 0;
-
     travelData.forEach(function (item) {
         // 在forEach的函式內進行累加
         count++;
@@ -133,7 +132,6 @@ function init() {
     });
     cardInfo.innerHTML = str;
     selectNum.textContent = strSearchNum;
-
 }
 init();
 
