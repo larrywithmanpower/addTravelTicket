@@ -41,7 +41,15 @@ function renderC3() {
             type: 'donut',
         },
         donut: {
-            title: "地區"
+            title: "地區",
+            label: {
+                show: false
+            },
+            width: 25
+        },
+        size: {
+            height: 160,
+            width: 160
         }
     });
 };
@@ -81,8 +89,8 @@ function renderData() {
         // 在forEach的函式內進行累加
         count++;
         str += addStr(item);
+        strSearchNum = `本次搜尋共${count}筆資料`;
     });
-    strSearchNum = `本次搜尋共${count}筆資料`;
     cardInfo.innerHTML = str;
     selectNum.textContent = strSearchNum;
 }
@@ -103,18 +111,19 @@ function selectData(e) {
         if (e.target.value == item["area"]) {
             count++;
             str += addStr(item);
+            strSearchNum = `本次搜尋共${count}筆資料`;
         } else if (e.target.value == "全部地區") {
             count++;
             str += addStr(item);
+            strSearchNum = `本次搜尋共${count}筆資料`;
         }
         // 沒有資料的顯示搜尋為0筆
-        else if (count === 0 && e.target.value !== "全部地區") {
+        if (count === 0 && e.target.value !== "全部地區") {
             strSearchNum = `本次搜尋共0筆資料`;
         }
+        cardInfo.innerHTML = str;
+        selectNum.textContent = strSearchNum;
     });
-    strSearchNum = `本次搜尋共${count}筆資料`;
-    cardInfo.innerHTML = str;
-    selectNum.textContent = strSearchNum;
 };
 
 // 新增資料
@@ -130,7 +139,7 @@ const addBtn = document.querySelector(".btn-js");
 
 addBtn.addEventListener("click", addCard);
 function addCard() {
-    if (ticketName.value == "" || imgUrl.value == "" || area.value == "" || ticketRank.value == "" || ticketCharge.value == "" || ticketNum.value == "") {
+    if (ticketName.value == "" || imgUrl.value == "" || area.value == "" || ticketRank.value == "") {
         alert("資料不齊全，無法資料新增");
     } else {
         travelData.push({
