@@ -216,20 +216,19 @@ const constraints = {
         },
     },
 };
-
+// 以屬性選擇器選取需要的input元素
 const inputs = document.querySelectorAll("input[type=text], input[type=url],input[type=number],select,textarea");
 
 inputs.forEach((item) => {
-
     item.addEventListener("change", function () {
-        console.log(item);
+        // console.log(item);
         item.nextElementSibling.textContent = ""; // 將同層下一個節點(.messages)文字清空
         let errors = validate(form, constraints);
-        console.log(errors)
+        // console.log(errors);
         //呈現在畫面上
         if (errors) {
             Object.keys(errors).forEach(function (keys) {
-                console.log(keys);
+                // console.log(keys);
                 document.querySelector(`.${keys}`).textContent = errors[keys];
             });
         };
