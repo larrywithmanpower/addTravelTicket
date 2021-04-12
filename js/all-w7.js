@@ -2,6 +2,62 @@
 
 let travelData;
 
+// 將屬性的部分改為中文，並將html的name及className以中文的型式對應
+const constraints = {
+    "名稱": {
+        presence: {
+            message: "是必填欄位"
+        },
+    },
+    "網址": {
+        presence: {
+            message: "是必填欄位"
+        },
+        url: {
+            schemes: ["http", "https"],
+            message: "必須是正確的網址"
+        }
+    },
+    "地區": {
+        presence: {
+            message: "是必填欄位"
+        },
+    },
+    "價格": {
+        presence: {
+            message: "是必填欄位"
+        },
+        numericality: {
+            greaterThan: 0,
+            message: "必須大於 0"
+        }
+    },
+    "組數": {
+        presence: {
+            message: "是必填欄位"
+        },
+        numericality: {
+            greaterThan: 0,
+            message: "必須大於 0"
+        }
+    },
+    "星級": {
+        presence: {
+            message: "是必填欄位"
+        },
+        numericality: {
+            greaterThanOrEqualTo: 1,
+            lessThanOrEqualTo: 10,
+            message: "必須符合 1-10 的區間"
+        }
+    },
+    "描述": {
+        presence: {
+            message: "是必填欄位"
+        },
+    },
+};
+
 // 資料取得
 function init() {
     axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json')
@@ -39,6 +95,9 @@ function renderC3() {
         data: {
             columns: newData,
             type: 'donut',
+        },
+        color: {
+            pattern: ['#33B326', '#B1B326', '#26B39A']
         },
         donut: {
             title: "地區",
@@ -100,9 +159,12 @@ init();
 
 // 篩選資料
 const selectLocation = document.querySelector(".selectLocation");
-
 selectLocation.addEventListener("change", selectData);
 function selectData(e) {
+    if (e.target.value == "全部地區") {
+        renderData();
+        return;
+    }
     let str = "";
     let strSearchNum = "";
     let count = 0;
@@ -112,13 +174,8 @@ function selectData(e) {
             count++;
             str += addStr(item);
             strSearchNum = `本次搜尋共${count}筆資料`;
-        } else if (e.target.value == "全部地區") {
-            count++;
-            str += addStr(item);
-            strSearchNum = `本次搜尋共${count}筆資料`;
-        }
-        // 沒有資料的顯示搜尋為0筆
-        if (count === 0 && e.target.value !== "全部地區") {
+        } 
+        if (count === 0) {
             strSearchNum = `本次搜尋共0筆資料`;
         }
         cardInfo.innerHTML = str;
@@ -138,10 +195,14 @@ const form = document.querySelector(".form-js");
 const addBtn = document.querySelector(".btn-js");
 
 addBtn.addEventListener("click", addCard);
+const messages = document.querySelectorAll('[data-msg]');
+
 function addCard() {
     // 送出驗證
-    if (ticketName.value == "" || imgUrl.value == "" || area.value == "" || ticketRank.value == "") {
-        alert("資料不齊全，無法資料新增");
+    let errors = validate(form, constraints);
+    if (errors) {
+        renderErrors(errors);
+        // alert("資料不齊全，無法資料新增");
     } else {
         travelData.push({
             id: Date.now(), //產出亂數
@@ -155,82 +216,42 @@ function addCard() {
         });
         // 表單清空使用.reset()
         form.reset();
+        // 清空messages
+        messages.forEach(item => {
+            item.textContent = "";
+        })
+        // reset為全部地區
+        selectLocation.options[0].selected = true;
     }
     renderC3();
     renderData();
 }
 
-// change驗證(validat.js)
-// 將屬性的部分改為中文，並將html的name及className以中文的型式對應
-const constraints = {
-    名稱: {
-        presence: {
-            message: "是必填欄位"
-        },
-    },
-    網址: {
-        presence: {
-            message: "是必填欄位"
-        },
-        url: {
-            schemes: ["http", "https"],
-            message: "必須是正確的網址"
-        }
-    },
-    地區: {
-        presence: {
-            message: "是必填欄位"
-        },
-    },
-    價格: {
-        presence: {
-            message: "是必填欄位"
-        },
-        numericality: {
-            greaterThan: 0,
-            message: "必須大於 0"
-        }
-    },
-    組數: {
-        presence: {
-            message: "是必填欄位"
-        },
-        numericality: {
-            greaterThan: 0,
-            message: "必須大於 0"
-        }
-    },
-    星級: {
-        presence: {
-            message: "是必填欄位"
-        },
-        numericality: {
-            greaterThanOrEqualTo: 1,
-            lessThanOrEqualTo: 10,
-            message: "必須符合 1-10 的區間"
-        }
-    },
-    描述: {
-        presence: {
-            message: "是必填欄位"
-        },
-    },
-};
-// 以屬性選擇器選取需要的input元素
-const inputs = document.querySelectorAll("input[type=text], input[type=url],input[type=number],select,textarea");
+// change驗證渲染(validat.js)
+function renderErrors(errors) {
+    messages.forEach(item => {
+        item.textContent ="";
+        item.textContent = errors[item.dataset.msg];
+    })
+}
 
-inputs.forEach((item) => {
-    item.addEventListener("change", function () {
-        // console.log(item);
-        item.nextElementSibling.textContent = ""; // 將同層下一個節點(.messages)文字清空
-        let errors = validate(form, constraints);
-        // console.log(errors);
-        //呈現在畫面上
-        if (errors) {
-            Object.keys(errors).forEach(function (keys) {
-                // console.log(keys);
-                document.querySelector(`.${keys}`).textContent = errors[keys];
-            });
-        };
-    });
-});
+
+// 以屬性選擇器選取需要的input元素
+// const inputs = document.querySelectorAll("input[type=text], input[type=url],input[type=number],select,textarea");
+
+// inputs.forEach((item) => {
+//     item.addEventListener("change", function () {
+//         // console.log(item);
+//         item.nextElementSibling.textContent = ""; // 將同層下一個節點(.messages)文字清空
+//         let errors = validate(form, constraints);
+//         // console.log(errors);
+//         //呈現在畫面上
+//         if (errors) {
+//             Object.keys(errors).forEach(function (keys) {
+//                 // console.log(keys);
+//                 document.querySelector(`.${keys}`).textContent = errors[keys];
+//             });
+//         };
+//     });
+// });
+
