@@ -183,7 +183,7 @@ function selectData(e) {
     });
 };
 
-// 新增資料
+// 新增資料DOM
 const ticketName = document.querySelector("#ticketName");
 const imgUrl = document.querySelector("#imgUrl");
 const area = document.querySelector("#area");
@@ -193,39 +193,52 @@ const ticketRank = document.querySelector("#ticketRank");
 const ticketDescription = document.querySelector("#ticketDescription");
 const form = document.querySelector(".form-js");
 const addBtn = document.querySelector(".btn-js");
-
-addBtn.addEventListener("click", addCard);
+// 驗證資料DOM
 const messages = document.querySelectorAll('[data-msg]');
+const inputs = document.querySelectorAll("input[type=text], input[type=url],input[type=number],select[id=area],textarea");
 
-function addCard() {
-    // 送出驗證
+// 驗證
+// 選取填寫後給予即時回饋
+inputs.forEach(item => {
+    item.addEventListener("change", function(e) {
+        let errors = validate(form, constraints);
+        item.nextElementSibling.textContent = "";
+        if (errors) {
+            renderErrors(errors);
+            return;
+        } else {
+            travelData.push({
+                id: Date.now(), //產出亂數
+                name: ticketName.value,
+                imgUrl: imgUrl.value,
+                area: area.value,
+                description: ticketDescription.value,
+                group: Number(ticketNum.value), //使用Number()轉型
+                price: Number(ticketCharge.value),
+                rate: Number(ticketRank.value)
+            });           
+        }
+        
+    });
+})
+// 點選新增按鈕時進行判斷
+addBtn.addEventListener('click', e => { 
     let errors = validate(form, constraints);
     if (errors) {
         renderErrors(errors);
-        // alert("資料不齊全，無法資料新增");
-    } else {
-        travelData.push({
-            id: Date.now(), //產出亂數
-            name: ticketName.value,
-            imgUrl: imgUrl.value,
-            area: area.value,
-            description: ticketDescription.value,
-            group: Number(ticketNum.value), //使用Number()轉型
-            price: Number(ticketCharge.value),
-            rate: Number(ticketRank.value)
-        });
-        // 表單清空使用.reset()
-        form.reset();
-        // 清空messages
-        messages.forEach(item => {
-            item.textContent = "";
-        })
-        // reset為全部地區
-        selectLocation.options[0].selected = true;
-    }
+        return;
+    }         
+    // 表單清空使用.reset()
+    form.reset();
+    // 清空messages
+    messages.forEach(item => {
+        item.textContent = "";
+    })
+    // reset為全部地區
+    selectLocation.options[0].selected = true;
+    renderData();   
     renderC3();
-    renderData();
-}
+})
 
 // change驗證渲染(validat.js)
 function renderErrors(errors) {
@@ -234,24 +247,4 @@ function renderErrors(errors) {
         item.textContent = errors[item.dataset.msg];
     })
 }
-
-
-// 以屬性選擇器選取需要的input元素
-// const inputs = document.querySelectorAll("input[type=text], input[type=url],input[type=number],select,textarea");
-
-// inputs.forEach((item) => {
-//     item.addEventListener("change", function () {
-//         // console.log(item);
-//         item.nextElementSibling.textContent = ""; // 將同層下一個節點(.messages)文字清空
-//         let errors = validate(form, constraints);
-//         // console.log(errors);
-//         //呈現在畫面上
-//         if (errors) {
-//             Object.keys(errors).forEach(function (keys) {
-//                 // console.log(keys);
-//                 document.querySelector(`.${keys}`).textContent = errors[keys];
-//             });
-//         };
-//     });
-// });
 
